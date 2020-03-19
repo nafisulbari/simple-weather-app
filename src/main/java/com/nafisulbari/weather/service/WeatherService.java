@@ -26,12 +26,12 @@ public class WeatherService {
      * @return weather data as json Object
      */
     public JsonObject getWeatherData() {
-
-        JsonObject jObj = new JsonObject();
+        JsonObject locationData =getLocationData();
+        JsonObject weatherData = new JsonObject();
 
         try {
 
-            URL url = new URL("https://api.darksky.net/forecast/d257f7195d5a5ac353a59304d20032db/" + getLatLong());
+            URL url = new URL("https://api.darksky.net/forecast/d257f7195d5a5ac353a59304d20032db/" + locationData.get("lat") + "," + locationData.get("lon")+"?units=si");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
@@ -46,17 +46,17 @@ public class WeatherService {
 
             String json = br.readLine();
 
-            System.out.println("Weather Data .... \n");
+            System.out.println("Weather Data ....");
             System.out.println(json);
 
-            jObj = new Gson().fromJson(json, JsonObject.class);
+            weatherData = new Gson().fromJson(json, JsonObject.class);
             conn.disconnect();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return jObj;
+        return weatherData;
     }
 
 
@@ -66,9 +66,9 @@ public class WeatherService {
      *
      * @return machines latitude,longitude.
      */
-    public String getLatLong() {
+    public JsonObject getLocationData() {
 
-        JsonObject jObj = new JsonObject();
+        JsonObject locationData = new JsonObject();
 
         try {
 
@@ -94,18 +94,18 @@ public class WeatherService {
 
             String json = br.readLine();
 
-            System.out.println("Location data .... \n");
+            System.out.println("Location data ....");
             System.out.println(json);
 
 
-            jObj = new Gson().fromJson(json, JsonObject.class);
+            locationData = new Gson().fromJson(json, JsonObject.class);
             conn.disconnect();
 
         } catch (IOException e) {
             e.printStackTrace();
 
         }
-        System.out.println("LOC: " + jObj.get("lat") + "," + jObj.get("lon"));
-        return jObj.get("lat") + "," + jObj.get("lon");
+
+        return locationData;
     }
 }

@@ -15,13 +15,14 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
 
+    public Label location;
+
+    public AnchorPane anchorPane;
+
+    public Label degree;
+
+
     WeatherService weatherService = WeatherService.getInstance();
-
-    @FXML
-    AnchorPane anchorPane;
-    @FXML
-    Label degree;
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -37,6 +38,9 @@ public class Controller implements Initializable {
         this.degree.setText(degreeVal);
     }
 
+    public void setLocation(String locationVal) {
+        this.location.setText(locationVal);
+    }
 
 
 
