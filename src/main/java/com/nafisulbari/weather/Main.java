@@ -6,6 +6,7 @@ import com.nafisulbari.weather.service.WeatherService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -39,14 +40,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample.fxml"));
-//        Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/app.fxml"));
 
-        WeatherService weatherService = new WeatherService();
+        WeatherService weatherService =WeatherService.getInstance();
 
 
 
-        GridPane gridPane =loader.load();
+        AnchorPane anchorPane =loader.load();
 
         //getting controller from the fxml file.
         Controller controller =loader.getController();
@@ -55,7 +56,7 @@ public class Main extends Application {
         //setting degree value from the Controller.setDegree(String degreeVal) method.
         controller.setDegree(weatherService.getWeatherData().get("currently").getAsJsonObject().get("temperature").toString());
 
-        Scene scene =  new Scene(gridPane,300,275);
+        Scene scene =  new Scene(anchorPane,250,150);
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("Hello World");
