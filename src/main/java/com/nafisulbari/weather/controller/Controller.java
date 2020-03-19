@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -14,10 +15,10 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
 
-    WeatherService weatherService = new WeatherService();
+    WeatherService weatherService = WeatherService.getInstance();
 
     @FXML
-    GridPane gridPane;
+    AnchorPane anchorPane;
     @FXML
     Label degree;
 
