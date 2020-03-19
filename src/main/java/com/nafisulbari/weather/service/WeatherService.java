@@ -11,13 +11,20 @@ import java.net.URL;
 
 public class WeatherService {
 
+    private static WeatherService instance = new WeatherService();
+
+    private WeatherService(){}
+
+    public static WeatherService getInstance(){
+        return instance;
+    }
+
 
     /**
      * //todo
      *
      * @return weather data as json Object
      */
-
     public JsonObject getWeatherData() {
 
         JsonObject jObj = new JsonObject();
