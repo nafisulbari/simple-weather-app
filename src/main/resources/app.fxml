@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="250.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nafisulbari.weather.controller.Controller">
@@ -13,14 +15,254 @@
             <Image url="@images/night.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="degree" alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="35.0" onMouseClicked="#degreeOnClicked" prefHeight="62.0" prefWidth="72.0" stylesheets="@css/style.css" text="00." textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="degree" alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="32.0" onMouseClicked="#degreeOnClicked" prefHeight="55.0" prefWidth="72.0" stylesheets="@css/style.css" text="00°" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="42.0" />
          </font></Label>
-      <Label fx:id="location" alignment="CENTER" layoutX="83.0" layoutY="1.0" prefHeight="27.0" prefWidth="84.0" text="Dhaka" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="location" alignment="CENTER" layoutX="50.0" layoutY="2.0" prefHeight="25.0" prefWidth="152.0" text="Dhaka" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
+      <Label fx:id="weatherType" layoutX="7.0" layoutY="40.0" text="Mostly Sunny" textFill="WHITE" />
+      <Label fx:id="realFeel" layoutX="6.0" layoutY="63.0" text="RealFeel 60.0" textFill="WHITE" />
+      <VBox alignment="CENTER" layoutX="1.0" layoutY="102.0" prefHeight="32.0" prefWidth="33.0">
+         <children>
+            <Label fx:id="label1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="S" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label1H" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="30.0" prefWidth="58.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label1L" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="23.0" prefWidth="76.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="38.0" layoutY="102.0" prefHeight="32.0" prefWidth="33.0">
+         <children>
+            <Label fx:id="label2" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="M" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label2H" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="30.0" prefWidth="58.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label2L" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="23.0" prefWidth="76.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="75.0" layoutY="102.0" prefHeight="32.0" prefWidth="33.0">
+         <children>
+            <Label fx:id="label3" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="T" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label3H" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="30.0" prefWidth="58.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label3L" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="23.0" prefWidth="76.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="110.0" layoutY="102.0" prefHeight="32.0" prefWidth="33.0">
+         <children>
+            <Label fx:id="label4" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="T" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label4H" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="30.0" prefWidth="58.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label4L" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="23.0" prefWidth="76.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="145.0" layoutY="102.0" prefHeight="32.0" prefWidth="33.0">
+         <children>
+            <Label fx:id="label5" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="W" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label5H" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="30.0" prefWidth="58.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label5L" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="23.0" prefWidth="76.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="179.0" layoutY="102.0" prefHeight="32.0" prefWidth="33.0">
+         <children>
+            <Label fx:id="label6" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="F" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label6H" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="30.0" prefWidth="58.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label6L" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="23.0" prefWidth="76.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="214.0" layoutY="102.0" prefHeight="32.0" prefWidth="33.0">
+         <children>
+            <Label fx:id="label7" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="S" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label7H" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="30.0" prefWidth="58.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label7L" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="23.0" prefWidth="76.0" text="00°" textAlignment="CENTER" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="-2.0" top="-2.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="-2.0" left="-2.0" right="-2.0" top="-2.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

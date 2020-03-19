@@ -15,11 +15,39 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
 
-    public Label location;
-
     public AnchorPane anchorPane;
-
+    public Label location;
     public Label degree;
+    public Label weatherType;
+    public Label realFeel;
+
+    public Label label1;
+    public Label label1H;
+    public Label label1L;
+
+    public Label label2;
+    public Label label2H;
+    public Label label2L;
+
+    public Label label3;
+    public Label label3H;
+    public Label label3L;
+
+    public Label label4;
+    public Label label4H;
+    public Label label4L;
+
+    public Label label5;
+    public Label label5H;
+    public Label label5L;
+
+    public Label label6;
+    public Label label6H;
+    public Label label6L;
+
+    public Label label7;
+    public Label label7H;
+    public Label label7L;
 
 
     WeatherService weatherService = WeatherService.getInstance();
@@ -41,6 +69,15 @@ public class Controller implements Initializable {
     public void setLocation(String locationVal) {
         this.location.setText(locationVal);
     }
+
+    public void setWeatherType(String weatherTypeVal){
+        this.weatherType.setText(weatherTypeVal);
+    }
+
+    public void setRealFeel(String realFeelVal){
+        realFeel.setText(realFeelVal);
+    }
+
 
 
 
