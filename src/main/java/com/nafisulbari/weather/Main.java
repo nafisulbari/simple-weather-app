@@ -5,10 +5,13 @@ import com.google.gson.JsonObject;
 import com.nafisulbari.weather.controller.Controller;
 import com.nafisulbari.weather.service.WeatherService;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.io.IOException;
@@ -22,6 +25,12 @@ import java.util.Date;
  */
 
 public class Main extends Application {
+
+    //offsets for dragging
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+
     public static void main(String[] args) throws IOException {
 
 
@@ -71,17 +80,53 @@ public class Main extends Application {
         controller.setLabel1L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(0).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
 
         controller.setLabel2(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(1).getAsJsonObject().get("time").getAsLong()));
-        controller.setLabel3(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(2).getAsJsonObject().get("time").getAsLong()));
-        controller.setLabel4(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("time").getAsLong()));
-        controller.setLabel5(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("time").getAsLong()));
-        controller.setLabel6(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("time").getAsLong()));
-        controller.setLabel7(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("time").getAsLong()));
+        controller.setLabel2H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(1).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        controller.setLabel2L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(1).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
 
+        controller.setLabel3(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(2).getAsJsonObject().get("time").getAsLong()));
+        controller.setLabel3H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(2).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        controller.setLabel3L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(2).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        controller.setLabel4(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("time").getAsLong()));
+        controller.setLabel4H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        controller.setLabel4L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        controller.setLabel5(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("time").getAsLong()));
+        controller.setLabel5H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        controller.setLabel5L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        controller.setLabel6(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("time").getAsLong()));
+        controller.setLabel6H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        controller.setLabel6L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        controller.setLabel7(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("time").getAsLong()));
+        controller.setLabel7H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        controller.setLabel7L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
 
         Scene scene = new Scene(anchorPane, 250, 150);
-        primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        primaryStage.setTitle("Hello World");
+        //grab your root here
+        anchorPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        //move around here
+        anchorPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setX(event.getScreenX() - xOffset);
+                primaryStage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
+
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
