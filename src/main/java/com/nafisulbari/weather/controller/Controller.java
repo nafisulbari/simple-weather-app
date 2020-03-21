@@ -2,12 +2,13 @@ package com.nafisulbari.weather.controller;
 
 import com.nafisulbari.weather.service.WeatherService;
 
-import javafx.fxml.FXML;
+
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +16,9 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
 
+
     public AnchorPane anchorPane;
+
     public Label location;
     public Label degree;
     public Label weatherType;
@@ -48,6 +51,8 @@ public class Controller implements Initializable {
     public Label label7;
     public Label label7H;
     public Label label7L;
+    public Button buttonClose;
+    public Button buttonRefresh;
 
 
     WeatherService weatherService = WeatherService.getInstance();
@@ -174,11 +179,10 @@ public class Controller implements Initializable {
     //-------------------------Controller Methods-------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------
 
-    public void degreeOnClicked(MouseEvent mouseEvent) {
-        degree.setText(weatherService.getWeatherData().get("currently").getAsJsonObject().get("temperature").toString());
+
+    public void buttonCloseOnClicked(MouseEvent mouseEvent) {
+        System.exit(0);
     }
-
-
 
 
 
