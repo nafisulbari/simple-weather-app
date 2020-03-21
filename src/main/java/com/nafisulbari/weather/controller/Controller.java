@@ -1,16 +1,19 @@
 package com.nafisulbari.weather.controller;
 
+import com.google.gson.JsonObject;
 import com.nafisulbari.weather.service.WeatherService;
 
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -51,8 +54,9 @@ public class Controller implements Initializable {
     public Label label7;
     public Label label7H;
     public Label label7L;
-    public Button buttonClose;
-    public Button buttonRefresh;
+
+    public ImageView buttonClose;
+    public ImageView buttonRefresh;
 
 
     WeatherService weatherService = WeatherService.getInstance();
@@ -184,9 +188,52 @@ public class Controller implements Initializable {
         System.exit(0);
     }
 
+    public void buttonRefreshOnClicked(MouseEvent mouseEvent) {
+        JsonObject weatherData = weatherService.getWeatherData();
+        JsonObject locationData = weatherService.getLocationData();
 
+        setDegree(weatherData.get("currently").getAsJsonObject().get("temperature").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLocation(locationData.get("city").toString().replace("\"", ""));
+        setWeatherType(weatherData.get("currently").getAsJsonObject().get("summary").toString().replace("\"", ""));
+        setRealFeel("RealFeel " + weatherData.get("currently").getAsJsonObject().get("apparentTemperature").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+
+        setLabel1(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(0).getAsJsonObject().get("time").getAsLong()));
+        setLabel1H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(0).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel1L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(0).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        setLabel2(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(1).getAsJsonObject().get("time").getAsLong()));
+        setLabel2H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(1).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel2L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(1).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        setLabel3(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(2).getAsJsonObject().get("time").getAsLong()));
+        setLabel3H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(2).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel3L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(2).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        setLabel4(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("time").getAsLong()));
+        setLabel4H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel4L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        setLabel5(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("time").getAsLong()));
+       setLabel5H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel5L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        setLabel6(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("time").getAsLong()));
+        setLabel6H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel6L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+
+        setLabel7(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("time").getAsLong()));
+        setLabel7H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel7L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
+    }
 
 
     //------------------------End of Controller Methods--------------------------------------------------------------
 
+
+
+    public String longToDayString(long l) {
+        Date date = new Date(l * 1000L);
+        return date.toString().substring(0, 1);
+    }
 }
