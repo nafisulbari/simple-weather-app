@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -19,17 +18,18 @@
             <Image url="@images/night.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="degree" alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="32.0" prefHeight="55.0" prefWidth="72.0" stylesheets="@css/style.css" text="00°" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="degree" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="29.0" prefHeight="55.0" prefWidth="72.0" stylesheets="@css/style.css" text="00°" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font size="42.0" />
+            <Font size="48.0" />
          </font></Label>
       <Label fx:id="location" alignment="CENTER" layoutX="50.0" layoutY="2.0" prefHeight="25.0" prefWidth="152.0" text="Dhaka" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="weatherType" layoutX="7.0" layoutY="40.0" text="Mostly Sunny" textFill="WHITE" />
-      <Label fx:id="realFeel" layoutX="6.0" layoutY="63.0" text="RealFeel 60.0" textFill="WHITE" />
+      <Label fx:id="windSpeed" layoutX="7.0" layoutY="50.0" text="Wind Speed" textFill="WHITE" />
+      <Label fx:id="weatherType" layoutX="7.0" layoutY="30.0" text="Mostly Sunny" textFill="WHITE" />
+      <Label fx:id="realFeel" layoutX="6.0" layoutY="69.0" text="RealFeel 60.0" textFill="WHITE" />
       <VBox alignment="CENTER" layoutX="1.0" layoutY="110.0" prefHeight="32.0" prefWidth="33.0">
          <children>
             <Label fx:id="label1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="S" textAlignment="CENTER" textFill="WHITE">
@@ -321,9 +321,6 @@
                      <bumpInput>
                         <Shadow />
                      </bumpInput>
-                     <light>
-                        <Light.Distant />
-                     </light>
                   </Lighting>
                </input>
             </Glow>
