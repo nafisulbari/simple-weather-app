@@ -3,22 +3,23 @@ package com.nafisulbari.weather.controller;
 import com.google.gson.JsonObject;
 import com.nafisulbari.weather.service.WeatherService;
 
-
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-
 import java.net.URL;
-import java.util.Date;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 
+/**
+ * Controller class of the JFX app
+ *
+ * @author Ahmed Nafisul Bari
+ */
 public class Controller implements Initializable {
 
 
@@ -63,6 +64,7 @@ public class Controller implements Initializable {
 
     public ImageView buttonClose;
     public ImageView buttonRefresh;
+    public ImageView backgroundImage;
 
 
     @Override
@@ -71,7 +73,7 @@ public class Controller implements Initializable {
     }
 
 
-    //-----------------------Get & Set methods for Controller injection--------------------------------------------
+    //-----------------------Get & Set methods for updating weather info-------------------------------------------
     //-------------------------------------------------------------------------------------------------------------
 
     public void setDegree(String degreeVal) {
@@ -182,13 +184,13 @@ public class Controller implements Initializable {
         this.label7L.setText(label7L);
     }
 
-
 //-------------------------End of Get & Set methods-------------------------------------------------------------
 
 
-    //-------------------------Controller Methods-------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------------------------
 
+
+    //-------------------------Controller Action Methods------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 
     public void buttonCloseOnClicked(MouseEvent mouseEvent) {
         System.exit(0);
@@ -197,22 +199,58 @@ public class Controller implements Initializable {
     public void buttonRefreshOnClicked(MouseEvent mouseEvent) {
         updateWeather();
     }
+    //------------------------End of Controller Action Methods------------------------------------------------------
+
+    //Using timer to update weather data
+    public void startTimer() {
 
 
-    //------------------------End of Controller Methods--------------------------------------------------------------
+        int MINUTES = 1;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
 
+                Platform.runLater(() -> setTimer("Updated " + timeCount + " minutes ago"));
+                timeCount++;
 
+                if (timeCount == 15) {
+                    Platform.runLater(() -> updateWeather());
+                }
+
+            }
+        }, 0, 1000 * 60 * MINUTES);
+
+    }
+    //-------------------------------------------
     public String longToDayString(long l) {
+
         Date date = new Date(l * 1000L);
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
         return date.toString().substring(0, 1);
+
+    }
+    //-------------------------------------------------------
+    public int longToCurrentHour(long l) {
+        Date date = new Date(l * 1000L);
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
-
+    //-----------Update of weather infos-----------------------------------------------------------------------------
     public void updateWeather() {
         WeatherService weatherService = WeatherService.getInstance();
         JsonObject locationData = weatherService.getLocationData();
         JsonObject weatherData = weatherService.getWeatherData(locationData);
 
+        long currentHour = longToCurrentHour(weatherData.get("currently").getAsJsonObject().get("time").getAsLong());
+        if (currentHour > 18 || currentHour < 6) {
+            backgroundImage.setImage(new Image("/images/night.jpg"));
+        } else {
+            backgroundImage.setImage(new Image("/images/day.jpg"));
+        }
 
         setDegree(weatherData.get("currently").getAsJsonObject().get("temperature").toString().split("\\.", 2)[0].concat("\u00B0"));
         setLocation(locationData.get("city").toString().replace("\"", ""));
@@ -255,26 +293,5 @@ public class Controller implements Initializable {
     }
 
 
-    //----Using timer to update weather data----
-    public void startTimer() {
 
-
-        int MINUTES = 1;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                Platform.runLater(() -> setTimer("Updated " + timeCount + " minutes ago"));
-                timeCount++;
-
-                if (timeCount == 15) {
-                    Platform.runLater(() -> updateWeather());
-                }
-
-            }
-        }, 0, 1000 * 60 * MINUTES);
-
-    }
-    //-------------------------------------------
 }
