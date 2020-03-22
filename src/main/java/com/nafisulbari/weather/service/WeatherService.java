@@ -31,7 +31,7 @@ public class WeatherService {
 
         try {
 
-            URL url = new URL("https://api.darksky.net/forecast/d257f7195d5a5ac353a59304d20032db/" + locationData.get("lat") + "," + locationData.get("lon")+"?units=si");
+            URL url = new URL("https://api.darksky.net/forecast/d257f7195d5a5ac353a59304d20032db/" + locationData.get("lat") + "," + locationData.get("lon")+"?units=ca");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
