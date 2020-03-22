@@ -40,3 +40,4 @@ target
 *.iml
 .idea/workspace.xml
 
+dependency-reduced-pom.xml
