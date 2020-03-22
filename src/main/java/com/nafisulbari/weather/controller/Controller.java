@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.nafisulbari.weather.service.WeatherService;
 
 
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -14,10 +15,14 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Controller implements Initializable {
 
+
+    static int timeCount = 0;
 
     public AnchorPane anchorPane;
 
@@ -205,12 +210,14 @@ public class Controller implements Initializable {
 
     public void updateWeather() {
         WeatherService weatherService = WeatherService.getInstance();
-        JsonObject weatherData = weatherService.getWeatherData();
         JsonObject locationData = weatherService.getLocationData();
+        JsonObject weatherData = weatherService.getWeatherData(locationData);
+
 
         setDegree(weatherData.get("currently").getAsJsonObject().get("temperature").toString().split("\\.", 2)[0].concat("\u00B0"));
         setLocation(locationData.get("city").toString().replace("\"", ""));
 
+        timeCount = 0;
         setTimer("Updated 0 minutes ago");
 
         setWeatherType(weatherData.get("currently").getAsJsonObject().get("summary").toString().replace("\"", ""));
@@ -248,4 +255,26 @@ public class Controller implements Initializable {
     }
 
 
+    //----Using timer to update weather data----
+    public void startTimer() {
+
+
+        int MINUTES = 1;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                Platform.runLater(() -> setTimer("Updated " + timeCount + " minutes ago"));
+                timeCount++;
+
+                if (timeCount == 15) {
+                    Platform.runLater(() -> updateWeather());
+                }
+
+            }
+        }, 0, 1000 * 60 * MINUTES);
+
+    }
+    //-------------------------------------------
 }

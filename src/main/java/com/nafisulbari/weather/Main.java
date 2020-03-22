@@ -82,28 +82,7 @@ public class Main extends Application {
 
         Controller controller = loader.getController();
         controller.updateWeather();
-
-
-        //----Using timer to update weather data----
-        int MINUTES = 1;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                timeCount++;
-                Platform.runLater(() -> controller.setTimer("Updated " + timeCount + " minutes ago"));
-                System.out.println(timeCount);
-
-                if (timeCount == 15) {
-                    Platform.runLater(controller::updateWeather);
-                    timeCount = 0;
-                }
-
-            }
-        }, 0, 1000 * 60 * MINUTES);
-        //-------------------------------------------
-
+        controller.startTimer();
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -111,6 +90,5 @@ public class Main extends Application {
 
     }
 
-    static int timeCount = 0;
 
 }
