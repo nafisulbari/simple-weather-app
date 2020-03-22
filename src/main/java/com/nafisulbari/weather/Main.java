@@ -3,7 +3,6 @@ package com.nafisulbari.weather;
 
 import com.nafisulbari.weather.controller.Controller;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,12 +14,11 @@ import javafx.stage.StageStyle;
 
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 
 /**
- * A simple weather app
+ * A simple weather widget
  *
  * @author Ahmed Nafisul Bari
  */
@@ -34,17 +32,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws IOException {
 
-
         launch(args);
-
-
-//        WeatherService weatherService = WeatherService.getInstance();
-//        System.out.println(weatherService.getWeatherData().get("currently").getAsJsonObject().get("temperature").toString());
-//
-//        System.err.println(weatherService.getWeatherData().get("currently").getAsJsonObject().get("temperature").toString());
-//
-//        System.out.println(weatherService.getWeatherData().get("hourly").getAsJsonObject().get("data").getAsJsonArray());
-
 
     }
 
@@ -53,8 +41,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/app.fxml"));
-//        Parent root = FXMLLoader.load(getClass().getResource("/app.fxml"));
-
 
         AnchorPane anchorPane = loader.load();
 
@@ -62,7 +48,7 @@ public class Main extends Application {
 
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        //Selecting the pane
+        //Selecting the pane for dragging----------------------------
         anchorPane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -71,7 +57,7 @@ public class Main extends Application {
             }
         });
 
-        //To move the pane on drag
+        //To move the pane on drag-----------------------------------
         anchorPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -86,7 +72,6 @@ public class Main extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-
 
     }
 

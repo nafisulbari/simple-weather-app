@@ -9,6 +9,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Singleton class to fetch weather information from darksky API
+ *
+ * @author Ahmed Nafisul Bari
+ */
 public class WeatherService {
 
     private static WeatherService INSTANCE = new WeatherService();
