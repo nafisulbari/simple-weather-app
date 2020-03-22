@@ -27,9 +27,9 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="windSpeed" layoutX="7.0" layoutY="50.0" text="Wind Speed" textFill="WHITE" />
-      <Label fx:id="weatherType" layoutX="7.0" layoutY="30.0" text="Mostly Sunny" textFill="WHITE" />
-      <Label fx:id="realFeel" layoutX="6.0" layoutY="69.0" text="RealFeel 60.0" textFill="WHITE" />
+      <Label fx:id="windSpeed" layoutX="7.0" layoutY="52.0" text="Wind Speed" textFill="WHITE" />
+      <Label fx:id="weatherType" layoutX="7.0" layoutY="33.0" text="Mostly Sunny" textFill="WHITE" />
+      <Label fx:id="realFeel" layoutX="7.0" layoutY="70.0" text="RealFeel 60.0" textFill="WHITE" />
       <VBox alignment="CENTER" layoutX="1.0" layoutY="110.0" prefHeight="32.0" prefWidth="33.0">
          <children>
             <Label fx:id="label1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="25.0" prefWidth="38.0" text="S" textAlignment="CENTER" textFill="WHITE">
@@ -334,5 +334,10 @@
             <Glow level="0.42" />
          </effect>
       </ImageView>
+      <Label fx:id="timer" layoutX="7.0" layoutY="17.0" text="Updated minutes ago" textFill="WHITE">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

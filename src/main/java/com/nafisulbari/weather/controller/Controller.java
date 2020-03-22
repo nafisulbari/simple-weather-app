@@ -5,7 +5,6 @@ import com.nafisulbari.weather.service.WeatherService;
 
 
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,14 +15,15 @@ import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
 
+public class Controller implements Initializable {
 
 
     public AnchorPane anchorPane;
 
     public Label location;
     public Label degree;
+    public Label timer;
     public Label weatherType;
     public Label windSpeed;
     public Label realFeel;
@@ -60,14 +60,10 @@ public class Controller implements Initializable {
     public ImageView buttonRefresh;
 
 
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
 
 
     //-----------------------Get & Set methods for Controller injection--------------------------------------------
@@ -81,15 +77,19 @@ public class Controller implements Initializable {
         this.location.setText(locationVal);
     }
 
-    public void setWeatherType(String weatherTypeVal){
+    public void setTimer(String timerVal) {
+        this.timer.setText(timerVal);
+    }
+
+    public void setWeatherType(String weatherTypeVal) {
         this.weatherType.setText(weatherTypeVal);
     }
 
-    public void setWindSpeed(String windSpeed){
-        this.windSpeed.setText(windSpeed);
+    public void setWindSpeed(String windSpeedVal) {
+        this.windSpeed.setText(windSpeedVal);
     }
 
-    public void setRealFeel(String realFeelVal){
+    public void setRealFeel(String realFeelVal) {
         realFeel.setText(realFeelVal);
     }
 
@@ -181,11 +181,6 @@ public class Controller implements Initializable {
 //-------------------------End of Get & Set methods-------------------------------------------------------------
 
 
-
-
-
-
-
     //-------------------------Controller Methods-------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------------
 
@@ -202,21 +197,22 @@ public class Controller implements Initializable {
     //------------------------End of Controller Methods--------------------------------------------------------------
 
 
-
     public String longToDayString(long l) {
         Date date = new Date(l * 1000L);
         return date.toString().substring(0, 1);
     }
 
 
-
-    public void updateWeather(){
+    public void updateWeather() {
         WeatherService weatherService = WeatherService.getInstance();
         JsonObject weatherData = weatherService.getWeatherData();
         JsonObject locationData = weatherService.getLocationData();
 
         setDegree(weatherData.get("currently").getAsJsonObject().get("temperature").toString().split("\\.", 2)[0].concat("\u00B0"));
         setLocation(locationData.get("city").toString().replace("\"", ""));
+
+        setTimer("Updated 0 minutes ago");
+
         setWeatherType(weatherData.get("currently").getAsJsonObject().get("summary").toString().replace("\"", ""));
         setWindSpeed("Wind " + weatherData.get("currently").getAsJsonObject().get("windSpeed").toString().concat(" km/h"));
         setRealFeel("RealFeel " + weatherData.get("currently").getAsJsonObject().get("apparentTemperature").toString().split("\\.", 2)[0].concat("\u00B0"));
@@ -250,4 +246,6 @@ public class Controller implements Initializable {
         setLabel7H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
         setLabel7L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
     }
+
+
 }
