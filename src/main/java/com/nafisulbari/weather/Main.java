@@ -2,8 +2,10 @@ package com.nafisulbari.weather;
 
 
 import com.google.gson.JsonObject;
+import com.nafisulbari.weather.controller.Controller;
 import com.nafisulbari.weather.service.WeatherService;
 import javafx.application.Application;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 
@@ -52,19 +56,18 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/app.fxml"));
 //        Parent root = FXMLLoader.load(getClass().getResource("/app.fxml"));
 
-        WeatherService weatherService = WeatherService.getInstance();
-        JsonObject weatherData = weatherService.getWeatherData();
-        JsonObject locationData = weatherService.getLocationData();
+
+
+
 
 
         AnchorPane anchorPane = loader.load();
 
-
         Scene scene = new Scene(anchorPane, 250, 150);
+
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-
-        //grab your root here
+        //Selecting the pane
         anchorPane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -73,7 +76,7 @@ public class Main extends Application {
             }
         });
 
-        //move around here
+        //To move the pane on drag
         anchorPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -84,10 +87,11 @@ public class Main extends Application {
 
 
 
+        Controller controller=loader.getController();
+        controller.updateWeather();
+
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
 
 
     }
