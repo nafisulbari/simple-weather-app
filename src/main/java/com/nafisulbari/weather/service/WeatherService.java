@@ -11,27 +11,31 @@ import java.net.URL;
 
 public class WeatherService {
 
-    private static WeatherService instance = new WeatherService();
+    private static WeatherService INSTANCE = new WeatherService();
 
-    private WeatherService(){}
+    private WeatherService() {
+    }
 
-    public static WeatherService getInstance(){
-        return instance;
+    public static WeatherService getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new WeatherService();
+        }
+        return INSTANCE;
     }
 
 
     /**
-     * //todo
+     * Takes locationData and gets the weather data
      *
      * @return weather data as json Object
      */
-    public JsonObject getWeatherData() {
-        JsonObject locationData =getLocationData();
+    public JsonObject getWeatherData(JsonObject locationData) {
+
         JsonObject weatherData = new JsonObject();
 
         try {
 
-            URL url = new URL("https://api.darksky.net/forecast/d257f7195d5a5ac353a59304d20032db/" + locationData.get("lat") + "," + locationData.get("lon")+"?units=ca");
+            URL url = new URL("https://api.darksky.net/forecast/d257f7195d5a5ac353a59304d20032db/" + locationData.get("lat") + "," + locationData.get("lon") + "?units=ca");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
