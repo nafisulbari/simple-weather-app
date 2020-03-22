@@ -25,6 +25,7 @@ public class Controller implements Initializable {
     public Label location;
     public Label degree;
     public Label weatherType;
+    public Label windSpeed;
     public Label realFeel;
 
     public Label label1;
@@ -59,7 +60,8 @@ public class Controller implements Initializable {
     public ImageView buttonRefresh;
 
 
-    WeatherService weatherService = WeatherService.getInstance();
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,6 +83,10 @@ public class Controller implements Initializable {
 
     public void setWeatherType(String weatherTypeVal){
         this.weatherType.setText(weatherTypeVal);
+    }
+
+    public void setWindSpeed(String windSpeed){
+        this.windSpeed.setText(windSpeed);
     }
 
     public void setRealFeel(String realFeelVal){
@@ -189,12 +195,30 @@ public class Controller implements Initializable {
     }
 
     public void buttonRefreshOnClicked(MouseEvent mouseEvent) {
+        updateWeather();
+    }
+
+
+    //------------------------End of Controller Methods--------------------------------------------------------------
+
+
+
+    public String longToDayString(long l) {
+        Date date = new Date(l * 1000L);
+        return date.toString().substring(0, 1);
+    }
+
+
+
+    public void updateWeather(){
+        WeatherService weatherService = WeatherService.getInstance();
         JsonObject weatherData = weatherService.getWeatherData();
         JsonObject locationData = weatherService.getLocationData();
 
         setDegree(weatherData.get("currently").getAsJsonObject().get("temperature").toString().split("\\.", 2)[0].concat("\u00B0"));
         setLocation(locationData.get("city").toString().replace("\"", ""));
         setWeatherType(weatherData.get("currently").getAsJsonObject().get("summary").toString().replace("\"", ""));
+        setWindSpeed("Wind " + weatherData.get("currently").getAsJsonObject().get("windSpeed").toString().concat(" km/h"));
         setRealFeel("RealFeel " + weatherData.get("currently").getAsJsonObject().get("apparentTemperature").toString().split("\\.", 2)[0].concat("\u00B0"));
 
 
@@ -215,7 +239,7 @@ public class Controller implements Initializable {
         setLabel4L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(3).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
 
         setLabel5(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("time").getAsLong()));
-       setLabel5H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
+        setLabel5H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
         setLabel5L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(4).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
 
         setLabel6(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(5).getAsJsonObject().get("time").getAsLong()));
@@ -225,15 +249,5 @@ public class Controller implements Initializable {
         setLabel7(longToDayString(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("time").getAsLong()));
         setLabel7H(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureHigh").toString().split("\\.", 2)[0].concat("\u00B0"));
         setLabel7L(weatherData.get("daily").getAsJsonObject().get("data").getAsJsonArray().get(6).getAsJsonObject().get("temperatureLow").toString().split("\\.", 2)[0].concat("\u00B0"));
-    }
-
-
-    //------------------------End of Controller Methods--------------------------------------------------------------
-
-
-
-    public String longToDayString(long l) {
-        Date date = new Date(l * 1000L);
-        return date.toString().substring(0, 1);
     }
 }
