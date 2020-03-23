@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -47,6 +48,7 @@ public class Main extends Application {
         Scene scene = new Scene(anchorPane, 250, 150);
 
         primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/cloud-icon-image.png")));
 
         //Selecting the pane for dragging----------------------------
         anchorPane.setOnMousePressed(new EventHandler<MouseEvent>() {
