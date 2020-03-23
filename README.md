@@ -1,6 +1,6 @@
 # Simple Weather Widget
-[![](https://img.shields.io/github/v/release/nafisulbari/simple-weather-widget?label=latest%20release)](https://github.com/nafisulbari/simple-weather-widget/releases/download/1.0/weather-widget.exe) <br/>
-![Screenshot](https://github.com/nafisulbari/simple-weather-widget/blob/master/screenshot.jpg?raw=true)<br/>
+[![](https://img.shields.io/github/v/release/nafisulbari/simple-weather-widget?label=latest%20release)](https://github.com/nafisulbari/simple-weather-widget/releases/download/1.0/weather-widget.exe) <br/><br/>
+![Screenshot](https://github.com/nafisulbari/simple-weather-widget/blob/master/screenshot.jpg?raw=true)<br/><br/>
 This weather widget is a personal project, made with **Java** and **javaFx**<br/>
 Also, weather data is fetched from [Dark Sky API](https://darksky.net/)<br/>
 **To run this widget, minimum _Java 8_ installation is required**
